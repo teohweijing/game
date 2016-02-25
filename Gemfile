@@ -14,6 +14,7 @@ gem 'paperclip', '~> 4.3', '>= 4.3.5'
 gem 'cancancan', '~> 1.13', '>= 1.13.1'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 gem 'font-awesome-rails', '~> 4.5', '>= 4.5.0.1'
+gem 'rails_db', '~> 1.1', '>= 1.1.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

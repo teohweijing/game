@@ -235,7 +235,7 @@
                 
             rippler.css({'z-index':9999});
             rippler.animate({
-              backgroundColor: "#FF6656",
+              backgroundColor: "#2196F3",
               width: '100%'
             }, 750 );
 
