@@ -1,0 +1,22 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "font-awesome";
+@import "style.css";
+@import "animate.min.css";
+@import "datatables.bootstrap.min.css";
+@import "jquery.ui.min.css";
+
+.navbar {
+height: 55px;
+background-color: #2196F3;
+color: #fff;
+border: none;
+}
+
+body {
+	background-color:#f0f3f4;
+}
+
+body.panel {
+	background-color:#fff;
+}

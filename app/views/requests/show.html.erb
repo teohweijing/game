@@ -1,0 +1,95 @@
+<div class="panel box-shadow-none content-header">
+    <div class="panel-body">
+      <div class="col-md-12">
+          <h3 class="animated fadeInLeft">Request Show</h3>
+          <p class="animated fadeInDown">
+            Request <span class="fa-angle-right fa"></span> <%= @request.category %>
+          </p>
+      </div>
+    </div>
+</div>
+
+<div class="col-md-12">
+  <div class="col-md-12">
+    <div class="panel box-v1">
+      <div class="panel-heading bg-white border-none">
+        <div class="col-md-6 col-sm-6 col-xs-6 text-left padding-0">
+          <h4 class="text-left"><%= @request.status %></h4>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6 text-right">
+           <h4 class="text-right"><%= @request.category %></h4>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="col-md-6">
+          <div class="panel-body text-center">
+            <p style="margin-bottom:0px;">Image</p>        
+            <h2 style="margin-top:0px;"><%= image_tag @request.image.url %></h2>
+            <hr>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <% if @request.game_name_2.nil? %>
+            <p style="margin-bottom:0px;">Game Name</p>
+            <h2 style="margin-top:0px;"><%= @request.game_name %></h2>
+            <hr>
+          <% else %>
+            <p style="margin-bottom:0px;">Transfer Game</p>
+            <p style="margin-bottom:0px;">From </p><h2 2 style="margin-top:0px; margin-bottom:0px;"><%= @request.game_name %></h2><p style="margin-bottom:0px;">To</p><h2 2 style="margin-top:0px;"><%= @request.game_name_2 %></h2>
+            <hr>
+          <% end %>
+
+          <p style="margin-bottom:0px;">Bank Name</p>
+          <h2 style="margin-top:0px;"><%= @request.bank_name %></h2>
+          <hr>
+
+          <p style="margin-bottom:0px;">Bank Acc</p>
+          <h2 style="margin-top:0px;"><%= @request.bank_acc %></h2>
+          <hr>
+
+          <p style="margin-bottom:0px;">Amount</p>
+          <h2 style="margin-top:0px;">RM <%= @request.amount %></h2>
+          <hr>
+
+          <p style="margin-bottom:0px;">User</p>
+          <h2 style="margin-top:0px;"><%= @request.user.name %></h2>
+          <hr>
+
+          <% if !@request.reason.nil?  %>
+            <p style="margin-bottom:0px;">Remark</p>
+            <h2 style="margin-top:0px;"><%= @request.reason %></h2>
+            <hr>
+          <% end %>
+
+        </div>   
+      </div>
+
+    <% if current_user.role.name == "Admin" || current_user.role.name == "Super Admin" %>
+      <%= form_for(@request) do |f| %>
+        <div class="field">
+        <%= f.hidden_field :status, value: "Approve" %><br>
+        <%= f.submit "Approve!" %>
+        </div>
+      <% end %>
+    
+      <%= form_for(@request) do |f| %>
+      <div class="field">
+      <%= f.hidden_field :status, value: "Reject" %><br>
+      <%= f.submit "Reject!" %>
+      </div>
+      <% end %>
+
+      <%= form_for(@request) do |f| %>
+      <div class="field">
+        <%= f.label :reason, "Remark for reject" %>
+        <%= f.text_field :reason %>
+        <%= f.submit "Add Remark" %>
+      </div>
+      <% end %>
+    <% end %>
+
+    <%= link_to 'Edit', edit_request_path(@request) %> |
+    <%= link_to 'Back', requests_path %>
+    </div>
+  </div>
+</div>

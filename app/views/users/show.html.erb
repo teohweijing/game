@@ -1,0 +1,38 @@
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>Role:</strong>
+  <%= @user.role.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong>Joined on:</strong>
+  <%= @joined_on %>
+</p>
+
+<p>
+  <strong>Last logged in on:</strong>
+  <%= @last_login %>
+</p>
+
+<p>
+  <strong>No. times of logged in:</strong>
+  <%= @user.sign_in_count %>
+</p>
+
+
+<%= link_to 'Deposit/Withdrawal', new_request_path %> |
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
+
+<%= link_to 'Accounts', user_accounts_path(@user) %>
+<%= link_to 'Create new game account', new_user_account_path(@user) %>
+

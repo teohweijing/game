@@ -1,0 +1,49 @@
+<div class="col-md-6">
+  <div class="panel">
+    <div class="panel-heading"><h3>Transfer</h3></div>
+    <div class="panel-body">
+      <%= form_for @request, html: { multipart: true } do |f| %>
+        <% if @request.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@request.errors.count, "error") %> prohibited this request from being saved:</h2>
+            <ul>
+            <% @request.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <div class="field">
+          <%= f.hidden_field :category, category: @request.category %>
+        </div>
+        <div class="field">
+          <%= f.label :game_name, "From (select a game from below)" %><br>
+          <%= collection_select(:request, :game_name, Application.order('name ASC'), :name, :name, {prompt: true}) %>
+        </div>
+        <div class="field">
+          <%= f.label :game_name_2, "To (select a game from below)" %><br>
+          <%= collection_select(:request, :game_name_2, Application.order('name ASC'), :name, :name, {prompt: true}) %>
+        </div>        
+        <div class="field">
+          <%= f.label :bank_name %><br>
+          <%= f.text_field :bank_name, value: current_user.bank_name %>
+        </div>
+        <div class="field">
+          <%= f.label :bank_acc %><br>
+          <%= f.text_field :bank_acc, value: current_user.bank_acc %>
+        </div>
+        <div class="field">
+          <%= f.label :amount %><br>
+          <%= f.number_field :amount %>
+        </div>
+        <div class="field">
+          <%= f.label :description %><br>
+          <%= f.text_field :description %>
+        </div><br>
+        <div class="actions">
+          <%= f.submit %>
+        </div>
+      <% end %>
+     </div>
+  </div>
+</div>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Myapp</title>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+
+	<body id="mimin" class="dashboard">
+		<!-- start: Header -->
+		<nav class="navbar navbar-default header navbar-fixed-top">
+			<div class="col-md-12 nav-wrapper">
+	            <div class="navbar-header" style="width:100%;">
+	              <div class="opener-left-menu is-open">
+	                <span class="top"></span>
+	                <span class="middle"></span>
+	                <span class="bottom"></span>
+	              </div>
+	                <a href="#" class="navbar-brand"> 
+	                 <b>GAME</b>
+	                </a>
+	              <ul class="nav navbar-nav navbar-right user-nav">
+	              	<% if !current_user.nil? %>
+	                  <li class="user-name"><span><%= current_user.name %></span></li>
+	                <% end %>
+	                  <li class="dropdown avatar-dropdown">
+	                   <img src="assets/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
+	                   <ul class="dropdown-menu user-dropdown">
+	                   	<% if user_signed_in? %>
+	                   		<li><%= link_to '<span class="fa fa-user"></span> Edit profile'.html_safe, edit_user_registration_path %></li>
+							<li><%= link_to '<span class="fa fa-sign-out"></span> Sign out'.html_safe, destroy_user_session_path, method: :delete %></li>
+						<% else %>
+							<li><%= link_to '<span class="fa fa-user-plus"></span> Sign up'.html_safe, new_user_registration_path %></li>
+							<li><%= link_to '<span class="fa fa-users"></span> Sign in'.html_safe, new_user_session_path %></li>
+						<% end %>
+	                  </ul>
+	                </li>
+	                <% if !current_user.nil? %>
+						<li><%= link_to '<span class="fa fa-sign-out"></span> Sign out'.html_safe, destroy_user_session_path, method: :delete %></li>
+	                <% else %>
+	                	<li><%= link_to '<span class="fa fa-users"></span> Sign in'.html_safe, new_user_session_path %></li>
+	                <% end %>
+	              </ul>
+	            </div>
+	         </div>
+		</nav>
+		<!-- end: Header -->
+
+		<div class="container-fluid mimin-wrapper">
+			<!-- start: Left Menu -->
+			<div id="left-menu">
+		      <div class="sub-left-menu scroll">
+		        <ul class="nav nav-list">
+		            <li><div class="left-bg"></div></li>
+		            <li class="time">
+		              <h1 class="animated fadeInLeft">21:00</h1>
+		              <p class="animated fadeInRight">Sat,October 1st 2029</p>
+		            </li>
+		            <li class="active ripple">
+		              <%= link_to root_url, class: 'nav-header' do %>
+		              	<span class="fa-home fa"></span> Home 
+		                <span class="fa-angle-right fa right-arrow text-right"></span>
+		              <% end %>
+		            </li>
+		            <li class="ripple">
+		              <% if !current_user.nil? %>
+			              <%= link_to user_accounts_path(current_user), class: 'nav-header' do %>
+			            	<span class="fa-diamond fa"></span> Game Accounts
+			            	<span class="fa-angle-right fa right-arrow text-right"></span>
+			              <% end %>
+		              <% end %>
+		            </li>
+		            <li class="ripple">
+		              <%= link_to requests_path, class: 'nav-header' do %>
+		            	<span class="fa-table fa"></span> All Requests
+		            	<span class="fa-angle-right fa right-arrow text-right"></span>
+		              <% end %>
+		            </li>		            
+		            <li class="ripple">
+		              <%= link_to new_request_path(category: "Deposit"), class: 'nav-header' do %>
+		            	<span class="fa-money fa"></span> Deposit
+		            	<span class="fa-angle-right fa right-arrow text-right"></span>
+		              <% end %>
+		            </li>
+		            <li class="ripple">
+		              <%= link_to new_request_path(category: "Withdrawal"), class: 'nav-header' do %>
+		            	<span class="fa-money fa"></span> Withdrawal
+		            	<span class="fa-angle-right fa right-arrow text-right"></span>
+		              <% end %>
+		            </li>
+		            <li class="ripple">
+		              <%= link_to new_request_path(category: "Transfer"), class: 'nav-header' do %>
+		            	<span class="fa-money fa"></span> Transfer
+		            	<span class="fa-angle-right fa right-arrow text-right"></span>
+		              <% end %>
+		            </li>		            
+		            <li class="ripple">
+		              <%= link_to edit_user_registration_path, class: 'nav-header' do %>
+		            	<span class="fa fa-cogs"></span> Account  
+		            	<span class="fa-angle-right fa right-arrow text-right"></span> 
+		              <% end %>
+		            </li>
+		            <li class="ripple">
+		              <%= link_to destroy_user_session_path, method: :delete, class: 'nav-header' do %>
+		              	<span class="fa fa-sign-out"></span> Sign Out  
+		              	<span class="fa-angle-right fa right-arrow text-right"></span> 
+		              <% end %>
+		            </li>
+		        </ul>
+		      </div>
+			</div>
+			<!-- end: Left Menu -->
+
+			<!-- start: Content -->
+			<div id="content">
+				<% flash.each do |name, msg| %>
+					<div class="alert" style="margin-bottom:0px; background-color:#fff;">
+						<%= content_tag :div, msg, id: "flash#{name}" %>
+					</div>
+				<% end %>
+				<%= yield %>
+			</div>
+			<!-- end: Content -->
+
+			<!-- start: Right Menu -->
+			<div id=""></div>
+			<!-- end: Right Menu -->
+		</div>
+
+		<!-- start: Mobile -->
+		<div id="mimin-mobile" class="reverse">
+	        <div class="mimin-mobile-menu-list">
+	            <div class="col-md-12 sub-mimin-mobile-menu-list animated fadeInLeft">
+	                <ul class="nav nav-list">
+	                    <li class="active ripple">
+	                      <a class="tree-toggle nav-header">
+	                        <span class="fa-home fa"></span>Home 
+	                        <span class="fa-angle-right fa right-arrow text-right"></span>
+	                      </a>
+	                    </li>
+	                    <li class="ripple">
+	                      <a class="tree-toggle nav-header">
+	                        <span class="fa-diamond fa"></span>Game Accounts
+	                        <span class="fa-angle-right fa right-arrow text-right"></span>
+	                      </a>
+	                    </li>
+	                    <li class="ripple">
+	                      <a class="tree-toggle nav-header">
+	                        <span class="fa-money fa"></span>Deposit
+	                        <span class="fa-angle-right fa right-arrow text-right"></span>
+	                      </a>
+	                    </li>
+	                    <li class="ripple">
+	                      <a class="tree-toggle nav-header">
+	                        <span class="fa fa-money"></span>Withdrawal
+	                        <span class="fa-angle-right fa right-arrow text-right"></span>
+	                      </a>
+	                    </li>
+	                    <li class="ripple">
+	                      <a class="tree-toggle nav-header">
+	                       <span class="fa fa-cogs"></span>Account
+	                       <span class="fa-angle-right fa right-arrow text-right"></span>
+	                      </a>
+	                    </li>
+	                    <li class="ripple">
+	                      <a class="tree-toggle nav-header">
+	                        <span class="fa fa-sign-out"></span>Sign Out
+	                        <span class="fa-angle-right fa right-arrow text-right"></span>
+	                      </a>
+	                    </li>
+
+
+	                    <li class="ripple">
+	                      <a href="calendar.html">
+	                         <span class="fa fa-calendar-o"></span>Calendar
+	                      </a>
+	                    </li>
+	                    <li class="ripple">
+	                      <a class="tree-toggle nav-header">
+	                        <span class="fa fa-envelope-o"></span>Mail
+	                        <span class="fa-angle-right fa right-arrow text-right"></span>
+	                      </a>
+	                      <ul class="nav nav-list tree">
+	                        <li><a href="mail-box.html">Inbox</a></li>
+	                        <li><a href="compose-mail.html">Compose Mail</a></li>
+	                        <li><a href="view-mail.html">View Mail</a></li>
+	                      </ul>
+	                    </li>
+	                    <li class="ripple">
+	                      <a class="tree-toggle nav-header">
+	                        <span class="fa fa-file-code-o"></span>Pages
+	                        <span class="fa-angle-right fa right-arrow text-right"></span>
+	                      </a>
+	                      <ul class="nav nav-list tree">
+	                        <li><a href="forgotpass.html">Forgot Password</a></li>
+	                        <li><a href="login.html">SignIn</a></li>
+	                        <li><a href="reg.html">SignUp</a></li>
+	                        <li><a href="article-v1.html">Article v1</a></li>
+	                        <li><a href="search-v1.html">Search Result v1</a></li>
+	                        <li><a href="productgrid.html">Product Grid</a></li>
+	                        <li><a href="profile-v1.html">Profile v1</a></li>
+	                        <li><a href="invoice-v1.html">Invoice v1</a></li>
+	                      </ul>
+	                    </li>
+	                     <li class="ripple"><a class="tree-toggle nav-header"><span class="fa "></span> MultiLevel  <span class="fa-angle-right fa right-arrow text-right"></span> </a>
+	                      <ul class="nav nav-list tree">
+	                        <li><a href="view-mail.html">Level 1</a></li>
+	                        <li><a href="view-mail.html">Level 1</a></li>
+	                        <li class="ripple">
+	                          <a class="sub-tree-toggle nav-header">
+	                            <span class="fa fa-envelope-o"></span> Level 1
+	                            <span class="fa-angle-right fa right-arrow text-right"></span>
+	                          </a>
+	                          <ul class="nav nav-list sub-tree">
+	                            <li><a href="mail-box.html">Level 2</a></li>
+	                            <li><a href="compose-mail.html">Level 2</a></li>
+	                            <li><a href="view-mail.html">Level 2</a></li>
+	                          </ul>
+	                        </li>
+	                      </ul>
+	                    </li>
+	                    <li><a href="credits.html">Credits</a></li>
+	                  </ul>
+	            </div>
+	        </div>       
+	      </div>
+	      <button id="mimin-mobile-menu-opener" class="animated rubberBand btn btn-circle btn-danger">
+	        <span class="fa fa-bars"></span>
+	      </button>
+	       <!-- end: Mobile -->
+
+		<%= javascript_include_tag 'application', 'data-turbolinks-eval' => false %>
+
+	</body>
+</html>
+

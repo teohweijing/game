@@ -1,0 +1,38 @@
+<div class="panel box-shadow-none content-header">
+  <div class="panel-body">
+    <div class="col-md-12">
+        <h3 class="animated fadeInLeft"><%= @request.category %></h3>
+        <p class="animated fadeInDown">
+          Request <span class="fa-angle-right fa"></span> <%= @request.category %>
+        </p>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-12 top-10 padding-0">
+  <div class="col-md-6">
+    <div class="alert alert-default alert-dismissible fade in" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+      <strong>Question?</strong> Please contact us at 018-888 8888 for any enquiries
+    </div>
+  </div>
+</div>
+
+<div class="col-md-12 top-10 padding-0">
+  <% if @request.category == "Withdrawal" %>  
+    <%= render 'withdrawalform' %>
+
+  <% elsif @request.category == "Deposit" %>
+    <%= render 'depositform' %>
+
+  <% elsif @request.category == "Transfer" %>
+    <%= render 'transferform' %>
+
+  <% else %>
+    <%= render 'form' %>
+  <% end %>
+  <!-- end: General Form -->
+
+</div>
+
+
