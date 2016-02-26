@@ -71,6 +71,7 @@ class RequestsController < ApplicationController
   # DELETE /requests/1
   # DELETE /requests/1.json
   def destroy
+    @request.image = nil
     @request.destroy
     respond_to do |format|
       format.html { redirect_to requests_url, notice: 'Request was successfully destroyed.' }

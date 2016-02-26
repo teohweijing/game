@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :Game %><br>
-    <%= collection_select(:account, :application_id, Application.all, :name, :name, {prompt: true}) %>
+    <%= collection_select(:account, :application_id, Application.all, :id, :name, {prompt: true}) %>
   </div>
 
   <div class="field">

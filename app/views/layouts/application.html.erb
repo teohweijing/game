@@ -109,10 +109,6 @@
 				<%= yield %>
 			</div>
 			<!-- end: Content -->
-
-			<!-- start: Right Menu -->
-			<div id=""></div>
-			<!-- end: Right Menu -->
 		</div>
 
 		<!-- start: Mobile -->
@@ -121,40 +117,54 @@
 	            <div class="col-md-12 sub-mimin-mobile-menu-list animated fadeInLeft">
 	                <ul class="nav nav-list">
 	                    <li class="active ripple">
-	                      <a class="tree-toggle nav-header">
-	                        <span class="fa-home fa"></span>Home 
+			              <%= link_to root_url, class: 'nav-header', 'data-no-turbolink' => true do %>
+	                        <span class="fa-home fa"></span> Home 
 	                        <span class="fa-angle-right fa right-arrow text-right"></span>
-	                      </a>
+	                      <% end %>
 	                    </li>
 	                    <li class="ripple">
-	                      <a class="tree-toggle nav-header">
-	                        <span class="fa-diamond fa"></span>Game Accounts
-	                        <span class="fa-angle-right fa right-arrow text-right"></span>
-	                      </a>
+			              <% if !current_user.nil? %>
+				              <%= link_to user_accounts_path(current_user), class: 'nav-header', 'data-no-turbolink' => true do %>
+				            	<span class="fa-diamond fa"></span> Game Accounts
+				            	<span class="fa-angle-right fa right-arrow text-right"></span>
+				              <% end %>
+			              <% end %>
+	                    </li>
+			            <li class="ripple">
+			              <%= link_to requests_path, class: 'nav-header', 'data-no-turbolink' => true do %>
+			            	<span class="fa-table fa"></span> All Requests
+			            	<span class="fa-angle-right fa right-arrow text-right"></span>
+			              <% end %>
+			            </li>		            	                    
+	                    <li class="ripple">
+			              <%= link_to new_request_path(category: "Deposit"), class: 'nav-header', 'data-no-turbolink' => true do %>
+			            	<span class="fa-money fa"></span> Deposit
+			            	<span class="fa-angle-right fa right-arrow text-right"></span>
+			              <% end %>
 	                    </li>
 	                    <li class="ripple">
-	                      <a class="tree-toggle nav-header">
-	                        <span class="fa-money fa"></span>Deposit
-	                        <span class="fa-angle-right fa right-arrow text-right"></span>
-	                      </a>
+			              <%= link_to new_request_path(category: "Withdrawal"), class: 'nav-header', 'data-no-turbolink' => true do %>
+			            	<span class="fa-money fa"></span> Withdrawal
+			            	<span class="fa-angle-right fa right-arrow text-right"></span>
+			              <% end %>
+	                    </li>
+			            <li class="ripple">
+			              <%= link_to new_request_path(category: "Transfer"), class: 'nav-header', 'data-no-turbolink' => true do %>
+			            	<span class="fa-money fa"></span> Transfer
+			            	<span class="fa-angle-right fa right-arrow text-right"></span>
+			              <% end %>
+			            </li>		            	                    
+	                    <li class="ripple">
+			              <%= link_to edit_user_registration_path, class: 'nav-header', 'data-no-turbolink' => true do %>
+			            	<span class="fa fa-cogs"></span> Account  
+			            	<span class="fa-angle-right fa right-arrow text-right"></span> 
+			              <% end %>
 	                    </li>
 	                    <li class="ripple">
-	                      <a class="tree-toggle nav-header">
-	                        <span class="fa fa-money"></span>Withdrawal
-	                        <span class="fa-angle-right fa right-arrow text-right"></span>
-	                      </a>
-	                    </li>
-	                    <li class="ripple">
-	                      <a class="tree-toggle nav-header">
-	                       <span class="fa fa-cogs"></span>Account
-	                       <span class="fa-angle-right fa right-arrow text-right"></span>
-	                      </a>
-	                    </li>
-	                    <li class="ripple">
-	                      <a class="tree-toggle nav-header">
-	                        <span class="fa fa-sign-out"></span>Sign Out
-	                        <span class="fa-angle-right fa right-arrow text-right"></span>
-	                      </a>
+			              <%= link_to destroy_user_session_path, method: :delete, class: 'nav-header', 'data-no-turbolink' => true do %>
+			              	<span class="fa fa-sign-out"></span> Sign Out  
+			              	<span class="fa-angle-right fa right-arrow text-right"></span> 
+			              <% end %>
 	                    </li>
 	                </ul>
 	            </div>

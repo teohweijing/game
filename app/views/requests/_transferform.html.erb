@@ -16,32 +16,32 @@
         <div class="field">
           <%= f.hidden_field :category, category: @request.category %>
         </div>
-        <div class="field">
+        <div class="form-group">
           <%= f.label :game_name, "From (select a game from below)" %><br>
-          <%= collection_select(:request, :game_name, Application.order('name ASC'), :name, :name, {prompt: true}) %>
+          <%= collection_select(:request, :game_name, Application.order('name ASC'), :name, :name, {prompt: true}, class: "form-control") %>
         </div>
-        <div class="field">
+        <div class="form-group">
           <%= f.label :game_name_2, "To (select a game from below)" %><br>
-          <%= collection_select(:request, :game_name_2, Application.order('name ASC'), :name, :name, {prompt: true}) %>
+          <%= collection_select(:request, :game_name_2, Application.order('name ASC'), :name, :name, {prompt: true}, class: "form-control") %>
         </div>        
-        <div class="field">
+        <div class="form-group">
           <%= f.label :bank_name %><br>
-          <%= f.text_field :bank_name, value: current_user.bank_name %>
+          <%= f.text_field :bank_name, value: current_user.bank_name, class: "form-control" %>
         </div>
-        <div class="field">
+        <div class="form-group">
           <%= f.label :bank_acc %><br>
-          <%= f.text_field :bank_acc, value: current_user.bank_acc %>
+          <%= f.text_field :bank_acc, value: current_user.bank_acc, class: "form-control" %>
         </div>
-        <div class="field">
+        <div class="form-group">
           <%= f.label :amount %><br>
-          <%= f.number_field :amount %>
+          <%= f.number_field :amount, class: "form-control" %>
         </div>
-        <div class="field">
+        <div class="form-group">
           <%= f.label :description %><br>
-          <%= f.text_field :description %>
+          <%= f.text_field :description, class: "form-control" %>
         </div><br>
         <div class="actions">
-          <%= f.submit %>
+          <%= f.submit "Submit", class: "btn ripple-infinite btn-raised btn-success" %>
         </div>
       <% end %>
      </div>

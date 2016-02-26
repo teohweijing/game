@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160224095050) do
+ActiveRecord::Schema.define(version: 20160226194624) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "username"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20160224095050) do
     t.integer  "user_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
-    t.string   "application_id"
+    t.integer  "application_id"
   end
 
   add_index "accounts", ["user_id"], name: "index_accounts_on_user_id"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20160224095050) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.string   "link_one"
   end
 
   create_table "banks", force: :cascade do |t|

@@ -19,28 +19,27 @@
         <div class="field">
           <%= f.hidden_field :category, category: @request.category %>
         </div>
-        <div class="field">
+        <div class="form-group">
           <%= f.label :game_name %><br>
-          <%= collection_select(:request, :game_name, Promotion.order('created_at DESC'), :application_id_with_description, :application_id_with_description, {prompt: true}) %>
-        </div>
-        <div class="field">
+          <%= collection_select(:request, :game_name, Promotion.order('created_at DESC'), :application_id_with_description, :application_id_with_description, {prompt: true}, {class: "form-control"}) %>
+        <div class="form-group">
           <%= f.label :bank_name %><br>
-          <%= f.text_field :bank_name, value: current_user.bank_name %>
+          <%= f.text_field :bank_name, value: current_user.bank_name, class: "form-control" %>
         </div>
-        <div class="field">
+        <div class="form-group">
           <%= f.label :bank_acc %><br>
-          <%= f.text_field :bank_acc, value: current_user.bank_acc %>
+          <%= f.text_field :bank_acc, value: current_user.bank_acc , class: "form-control"%>
         </div>
-        <div class="field">
+        <div class="form-group">
           <%= f.label :amount %><br>
-          <%= f.number_field :amount %>
+          <%= f.number_field :amount, class: "form-control" %>
         </div>
-        <div class="field">
+        <div class="form-group">
           <%= f.label :description %><br>
-          <%= f.text_field :description %>
+          <%= f.text_field :description, class: "form-control" %>
         </div><br>
         <div class="actions">
-          <%= f.submit %>
+          <%= f.submit "Submit", class: "btn ripple-infinite btn-raised btn-success" %>
         </div>
       <% end %>
      </div>

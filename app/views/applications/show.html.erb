@@ -8,5 +8,12 @@
   <%= image_tag @application.image.url %>
 </p>
 
+<p>
+  <strong>Link One:</strong>
+  <%= @application.link_one %>
+</p>
+
+<%= link_to @application.link_one, @application.link_one, target: "_blank" %>
+
 <%= link_to 'Edit', edit_application_path(@application) %> |
 <%= link_to 'Back', applications_path %>

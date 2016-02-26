@@ -26,6 +26,7 @@
                 <th>Game</th>
                 <th>Username</th>
                 <th>Password</th>
+                <th>Download Link</th>
                 <% if current_user.role.name == "Admin" || current_user.role.name == "Super Admin" %>
                   <th colspan="3"></th>
                 <% end %>
@@ -36,10 +37,10 @@
               <% @accounts.each do |account| %>
                 <tr>
                   <td><%= account.user.name %></td>
-                  <td><%= account.application_id %></td>
+                  <td><%= account.application.name %></td>
                   <td><%= account.username %></td>
                   <td><%= account.password %></td>
-
+                  <td><%= link_to "Download Here", account.application.link_one, target: "_blank" %></td>
                   <% if current_user.role.name == "Admin" || current_user.role.name == "Super Admin" %>
                     <td><%= link_to 'Show', [account.user, account] %></td>
                     <td><%= link_to 'Edit', edit_user_account_path(account.user, account) %></td>
