@@ -17,7 +17,6 @@ gem 'font-awesome-rails', '~> 4.5', '>= 4.5.0.1'
 gem 'rails_db', '~> 1.1', '>= 1.1.1'
 gem 'will_paginate', '~> 3.1'
 gem 'will_paginate-bootstrap', '~> 1.0', '>= 1.0.1'
-gem 'translation_center', '~> 2.0', '>= 2.0.2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -30,5 +29,13 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+group :production do
+  gem 'pg'
+  gem 'rails_12factor', '0.0.2'
+end
+
+gem 'mysql2'
+
 end
 
