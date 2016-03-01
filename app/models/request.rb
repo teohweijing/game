@@ -2,8 +2,7 @@ class Request < ActiveRecord::Base
   belongs_to :user
   belongs_to :promotion
   before_save :assign_status
-  # validate :validate_approved_by
-  
+  # validate :validate_approved_by  
   # Image upload system, change the resolution of 'medium' for preview
   has_attached_file :image, 
                     styles: { medium: "300x300>", thumb: "100x100>" }, 
@@ -25,4 +24,5 @@ class Request < ActiveRecord::Base
   def assign_status
   	self.status = "Pending" if self.status.nil?
   end
+
 end

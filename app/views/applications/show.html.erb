@@ -1,19 +1,33 @@
-<p>
-  <strong>Name:</strong>
-  <%= @application.name %>
-</p>
+<div class="panel box-shadow-none content-header">
+  <div class="panel-body">
+    <div class="col-md-12">
+        <h3 class="animated fadeInLeft">All Applications</h3>
+        <p class="animated fadeInDown">
+          Applications <span class="fa-angle-right fa"></span> <%= @application.name %>
+        </p>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Image:</strong>
-  <%= image_tag @application.image.url %>
-</p>
+<div class="col-md-6 top-20 padding-0">
+  <div class="col-md-12">
+    <div class="panel">
+      <div class="panel-heading"><h3>Application - <%= @application.name %></h3></div>
+      <div class="panel-body">
 
-<p>
-  <strong>Link One:</strong>
-  <%= @application.link_one %>
-</p>
+		<p>
+		  <strong>Name:</strong>
+		  <%= @application.name %>
+		</p>
 
-<%= link_to @application.link_one, @application.link_one, target: "_blank" %>
+		<p>
+		  <strong>Link One:</strong>
+		  <%= link_to @application.link_one, @application.link_one, target: "_blank" %>
+		</p>
 
-<%= link_to 'Edit', edit_application_path(@application) %> |
-<%= link_to 'Back', applications_path %>
+		<%= link_to 'Edit', edit_application_path(@application), class: "btn btn-round btn-primary" %>
+
+	  </div>
+	</div>
+  </div>
+</div>

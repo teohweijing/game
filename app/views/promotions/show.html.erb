@@ -1,12 +1,29 @@
-<p>
-  <strong>Description:</strong>
-  <%= @promotion.description %>
-</p>
+<div class="panel box-shadow-none content-header">
+  <div class="panel-body">
+    <div class="col-md-12">
+        <h3 class="animated fadeInLeft">All Promotions</h3>
+        <p class="animated fadeInDown">
+          Promotion <span class="fa-angle-right fa"></span> All Promotions
+        </p>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Application:</strong>
-  <%= @promotion.application_id %>
-</p>
-
-<%= link_to 'Edit', edit_promotion_path(@promotion) %> |
-<%= link_to 'Back', promotions_path %>
+<div class="col-md-6 top-20 padding-0">
+  <div class="col-md-12">
+    <div class="panel">
+      <div class="panel-heading"><h3>Promotion - <%= @promotion.application.name %></h3></div>
+      <div class="panel-body">
+      	<p>
+		  <strong>Game Platform:</strong>
+		  <%= @promotion.application.name %>
+		</p>      	
+		<p>
+		  <strong>Description:</strong>
+		  <%= @promotion.description %>
+		</p>
+		<%= link_to 'Edit', edit_promotion_path(@promotion), class: "btn btn-round btn-primary" %>
+	  </div>
+	</div>
+  </div>
+</div>

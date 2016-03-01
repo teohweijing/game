@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :banks
   resources :promotions
   devise_for :users
+
   scope "/admin" do
   	resources :users
   	# resources :users do

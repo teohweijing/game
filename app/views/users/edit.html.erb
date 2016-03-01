@@ -1,6 +1,22 @@
-<h1>Editing User</h1>
+<div class="panel box-shadow-none content-header">
+  <div class="panel-body">
+    <div class="col-md-12">
+        <h3 class="animated fadeInLeft">User</h3>
+        <p class="animated fadeInDown">
+          User <span class="fa-angle-right fa"></span> Edit
+        </p>
+    </div>
+  </div>
+</div>
 
-<%= render 'form' %>
+<div class="col-md-6">
+  <div class="panel">
+    <div class="panel-heading"><h3>Edit User - <%= @user.name %></h3></div>
+    <div class="panel-body">
 
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+		<%= render 'form' %>
+
+	</div>
+  </div>
+</div>
+

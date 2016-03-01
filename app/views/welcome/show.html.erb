@@ -11,52 +11,87 @@
 </div>
 
 <div class="col-md-12 top-20 padding-0">
-  <div class="col-md-6">
-
-    <div class="panel">
-
-      <div class="panel-heading"><h3>Home</h3></div>
-      <div class="panel-body">
-        <div class="responsive-table">
-          <table id="datatables-example" class="table table-striped table-bordered" width="100%" cellspacing="0">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Acc</th>
-                <th>Status</th>
-                <% if current_user.role.name == "Admin" || current_user.role.name == "Super Admin" %>
-                  <th colspan="3"></th>
-                <% end %>
-              </tr>
-            </thead>
-
-            <tbody>
-              <% @banks.each do |bank| %>
-                <tr>
-                  <td><%= bank.name %></td>
-                  <td><%= bank.acc %></td>
-                  <% if bank.status == "Active" %>
-                    <td style="color:#27C24C;"><%= bank.status %></td>
-                  <% else %>
-                    <td style="color:#FF6656;"><%= bank.status %></td>
-                  <% end %>
-                  <% if current_user.role.name == "Admin" || current_user.role.name == "Super Admin" %>
-                    <td><%= link_to 'Show', bank %></td>
-                    <td><%= link_to 'Edit', edit_bank_path(bank) %></td>
-                    <td><%= link_to 'Destroy', bank, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-                  <% end %>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
+  <div class="col-md-12">
+    <div class="panel box-v1">
+      <div class="panel-heading bg-white border-none">
+        <h4 class="text-center">Pending Requests</h4>
+      </div>
+    </div>
+  </div>
+  <% @pendings.each do |pending| %>
+    <div class="col-md-4">
+      <div class="panel box-v1">
+        <div class="panel-heading bg-white border-none">
+          <div class="col-md-6 col-sm-6 col-xs-6 text-left padding-0">
+            <% if pending.status == "Pending" %>
+              <h4 class="text-left" style="color:#F0AD4E;"><%= pending.status %></h4>
+            <% elsif pending.status == "Approve" %>
+              <h4 class="text-left" style="color:#27C24C;"><%= pending.status %></h4>
+            <% elsif pending.status == "Reject" %>
+              <h4 class="text-left" style="color:#FF6656;"><%= pending.status %></h4>
+            <% end %>
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-6 text-right">
+             <h4>
+             <%= pending.category %>
+             </h4>
+          </div>
+        </div>
+        <div class="panel-body text-center">
+          <h1>RM <%= pending.amount %></h1>
+          <% if pending.category == "Transfer" %>
+            <p>From <%= pending.game_name %> To <%= pending.game_name_2 %></p>
+          <% else %>
+            <p><%= pending.game_name %></p>
+          <% end %>
+          <hr/>
+          <p><%= pending.created_at.strftime("%d %B %Y at %I.%M %p") %></p>
         </div>
       </div>
+    </div>
+  <% end %>
 
-<!--       <%= link_to 'View all accounts', user_accounts_path(@user) %><br>
-      <%= link_to 'Deposit/Withdrawal', requests_path(@user) %> |
-      <%= link_to 'Edit', edit_user_path(@user) %> |
-      <%= link_to 'Back', users_path %>
-      <%= link_to 'Create new game account', new_user_account_path(@user) %>
- -->    </div>
+  <div class="col-md-12">
+    <div class="panel box-v1">
+      <div class="panel-heading bg-white border-none">
+        <h4 class="text-center">All Requests</h4>
+      </div>
+    </div>
+  </div>
+  <% @requests.each do |request| %>
+    <div class="col-md-4">
+      <div class="panel box-v1">
+        <div class="panel-heading bg-white border-none">
+          <div class="col-md-6 col-sm-6 col-xs-6 text-left padding-0">
+            <% if request.status == "Pending" %>
+              <h4 class="text-left" style="color:#F0AD4E;"><%= request.status %></h4>
+            <% elsif request.status == "Approve" %>
+              <h4 class="text-left" style="color:#27C24C;"><%= request.status %></h4>
+            <% elsif request.status == "Reject" %>
+              <h4 class="text-left" style="color:#FF6656;"><%= request.status %></h4>
+            <% end %>
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-6 text-right">
+             <h4>
+             <%= request.category %>
+             </h4>
+          </div>
+        </div>
+        <div class="panel-body text-center">
+          <h1>RM <%= request.amount %></h1>
+          <% if request.category == "Transfer" %>
+            <p>From <%= request.game_name %> To <%= request.game_name_2 %></p>
+          <% else %>
+            <p><%= request.game_name %></p>
+          <% end %>
+          <hr/>
+          <p><%= request.created_at.strftime("%d %B %Y at %I.%M %p") %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <div class="col-md-12 text-center">
+    <%= will_paginate @requests, renderer: BootstrapPagination::Rails %>
   </div>
 </div>
+

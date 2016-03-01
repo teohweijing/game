@@ -11,15 +11,15 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :Game %><br>
-    <%= collection_select(:promotion, :application_id, Application.all, :id, :name, {prompt: true}) %>
+    <%= collection_select(:promotion, :application_id, Application.all, :id, :name, {prompt: true}, class: "form-control") %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :description %><br>
-    <%= f.text_field :description %>
+    <%= f.text_field :description, class: "form-control" %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Submit", class: "btn btn-raised btn-success" %>
   </div>
 <% end %>

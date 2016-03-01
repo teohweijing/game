@@ -15,6 +15,9 @@ gem 'cancancan', '~> 1.13', '>= 1.13.1'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 gem 'font-awesome-rails', '~> 4.5', '>= 4.5.0.1'
 gem 'rails_db', '~> 1.1', '>= 1.1.1'
+gem 'will_paginate', '~> 3.1'
+gem 'will_paginate-bootstrap', '~> 1.0', '>= 1.0.1'
+gem 'translation_center', '~> 2.0', '>= 2.0.2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

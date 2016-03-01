@@ -1,17 +1,43 @@
-<p>
-  <strong>Name:</strong>
-  <%= @bank.name %>
-</p>
+<div class="panel box-shadow-none content-header">
+  <div class="panel-body">
+    <div class="col-md-12">
+        <h3 class="animated fadeInLeft">Banks</h3>
+        <p class="animated fadeInDown">
+          Banks <span class="fa-angle-right fa"></span> <%= @bank.name %>
+        </p>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Acc:</strong>
-  <%= @bank.acc %>
-</p>
+<div class="col-md-6 top-20 padding-0">
+  <div class="col-md-12">
+    <div class="panel">
+      <div class="panel-heading"><h3>Bank - <%= @bank.name %></h3></div>
+      <div class="panel-body">
 
-<p>
-  <strong>Status:</strong>
-  <%= @bank.status %>
-</p>
+		<p>
+		  <strong>Bank Name:</strong>
+		  <%= @bank.name %>
+		</p>
 
-<%= link_to 'Edit', edit_bank_path(@bank) %> |
-<%= link_to 'Back', banks_path %>
+		<p>
+		  <strong>Bank Account No:</strong>
+		  <%= @bank.acc %>
+		</p>
+
+		<p>
+		  <strong>Account Holder Name:</strong>
+		  <%= @bank.holder_name %>
+		</p>
+
+		<p>
+		  <strong>Status:</strong>
+		  <%= @bank.status %>
+		</p>
+
+		<%= link_to 'Edit', edit_bank_path(@bank), class:"btn btn-round btn-primary" %>
+		
+	  </div>
+	</div>
+  </div>
+</div>

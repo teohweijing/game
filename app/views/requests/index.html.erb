@@ -23,12 +23,15 @@
                 <tr>
                   <th>Status</th>
                   <th>Category</th>
+                  <th>User</th>
+                  <th>Amount</th>                  
                   <th>Game name</th>
-                  <th>Bank name</th>
-                  <th>Bank acc</th>
-                  <th>Amount</th>
                   <th>Remark</th>
-                  <th colspan="3"></th>
+                  <% if current_user.role.name == "Regular" %>
+                    <th colspan="1"></th>
+                  <% elsif current_user.role.name == "Admin" || current_user.role.name == "Super Admin" %>
+                    <th colspan="2"></th>
+                  <% end %>
                 </tr>
               </thead>
 
@@ -43,18 +46,19 @@
                       <td style="color:#FF6656;"><%= request.status %></td>
                     <% end %>
                     <td><%= request.category %></td>
+                    <td><%= request.user.name %></td>
+                    <td>RM <%= request.amount %></td>                    
                     <td><%= request.game_name %></td>
-                    <td><%= request.bank_name %></td>
-                    <td><%= request.bank_acc %></td>
-                    <td><%= request.amount %></td>
                     <% if !request.reason.nil? %>
-                      <td><%= request.reason %>
+                      <td>*<%= request.reason %></td>
                     <% else %>
-                      <td></td>
+                      <td>*No remark</td>
                     <% end %>
+
                     <td><%= link_to 'Show', request %></td>
-                    <td><%= link_to 'Edit', edit_request_path(request) %></td>
-                    <td><%= link_to 'Destroy', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                    <% if current_user.role.name == "Admin" || current_user.role.name == "Super Admin" %>
+                      <td><%= link_to 'Destroy', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                    <% end %>
                   </tr>
                 <% end %>
               </tbody>
@@ -79,12 +83,16 @@
               <tr>
                 <th>Status</th>
                 <th>Category</th>
+                <th>User</th>
+                <th>Amount</th>                
                 <th>Game name</th>
-                <th>Bank name</th>
-                <th>Bank acc</th>
-                <th>Amount</th>
                 <th>Remark</th>
-                <th colspan="3"></th>
+                <th>Approved by</th>
+                <% if current_user.role.name == "Regular" %>
+                  <th colspan="1"></th>
+                <% elsif current_user.role.name == "Admin" || current_user.role.name == "Super Admin" %>
+                  <th colspan="2"></th>
+                <% end %>
               </tr>
             </thead>
 
@@ -99,18 +107,19 @@
                     <td style="color:#FF6656;"><%= request.status %></td>
                   <% end %>
                   <td><%= request.category %></td>
+                  <td><%= request.user.name %></td>
+                  <td>RM <%= request.amount %></td>                  
                   <td><%= request.game_name %></td>
-                  <td><%= request.bank_name %></td>
-                  <td><%= request.bank_acc %></td>
-                  <td><%= request.amount %></td>
                   <% if !request.reason.nil? %>
-                    <td><%= request.reason %>
+                    <td>*<%= request.reason %>
                   <% else %>
-                    <td></td>
-                  <% end %>                
+                    <td>*No remark</td>
+                  <% end %>
+                  <td><%= request.approved_by %></td>               
                   <td><%= link_to 'Show', request %></td>
-                  <td><%= link_to 'Edit', edit_request_path(request) %></td>
-                  <td><%= link_to 'Destroy', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                  <% if current_user.role.name == "Admin" || current_user.role.name == "Super Admin" %>
+                    <td><%= link_to 'Destroy', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                  <% end %>
                 </tr>
               <% end %>
             </tbody>

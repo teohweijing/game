@@ -53,19 +53,28 @@ class RequestsController < ApplicationController
   # PATCH/PUT /requests/1
   # PATCH/PUT /requests/1.json
   def update
+    @request = Request.find(params[:id])
+    
     if @request.approved_by.nil?
       @request.approved_by = current_user.name
       @request.save
-    end
-    respond_to do |format|
-      if @request.update(request_params)
-        format.html { redirect_to @request, notice: 'Request was successfully updated.' }
-        format.json { render :show, status: :ok, location: @request }
-      else
-        format.html { render :edit }
-        format.json { render json: @request.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @request.update(request_params)
+          format.html { redirect_to @request, notice: 'Request was successfully updated.' }
+          format.json { render :show, status: :ok, location: @request }
+        else
+          format.html { render :edit }
+          format.json { render json: @request.errors, status: :unprocessable_entity }
+        end
+      end
+
+    else
+      respond_to do |format|
+        format.html { redirect_to @request, notice: 'Request has already been processed' }
+        format.json { render :show, status: :ok, location: @request}
       end
     end
+
   end
 
   # DELETE /requests/1
@@ -80,6 +89,15 @@ class RequestsController < ApplicationController
   end
 
   private
+    def detect_changes
+      @changed = []
+      @changed << :approved_by if @request.approved_by != params[:request][:approved_by]
+    end
+
+    def attr_changed?
+      @changed.include :approved_by
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     # category: Withdrawal, Deposit, Transfer
     # status: Pending, Approve, Reject

@@ -17,14 +17,16 @@ class Ability
         # can :manage, Request do |request|
         #     request.try(:user) == user
         # end
-        can :read, Request
+        can :read, Request do |request|
+            request.try(:user) == user
+        end
         can :create, Request
-        can :update, Request do |request|
-            request.try(:user) == user
-        end
-        can :destroy, Request do |request|
-            request.try(:user) == user
-        end
+        # can :update, Request do |request|
+        #     request.try(:user) == user
+        # end
+        # can :destroy, Request do |request|
+        #     request.try(:user) == user
+        # end
         can :read, Account do |account|
             account.try(:user) == user
         end

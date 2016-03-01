@@ -1,7 +1,7 @@
 <div class="panel box-shadow-none content-header">
     <div class="panel-body">
       <div class="col-md-12">
-          <h3 class="animated fadeInLeft">Request Show</h3>
+          <h3 class="animated fadeInLeft">Request</h3>
           <p class="animated fadeInDown">
             Request <span class="fa-angle-right fa"></span> <%= @request.category %>
           </p>
@@ -9,88 +9,102 @@
     </div>
 </div>
 
-<div class="col-md-12">
+<div class="col-md-6 top-20 padding-0">
   <div class="col-md-12">
-    <div class="panel box-v1">
-      <div class="panel-heading bg-white border-none">
-        <div class="col-md-6 col-sm-6 col-xs-6 text-left padding-0">
-          <h4 class="text-left"><%= @request.status %></h4>
+    <div class="panel">
+
+      <% if @request.status == "Pending" %>
+        <div class="panel-heading" style="background:#F0AD4E;"><h3 style="color:white;"><%= @request.category %> ( <%= @request.status %> )</h3></div>
+      <% elsif @request.status == "Approve" %>
+        <div class="panel-heading" style="background:#27C24C;"><h3 style="color:white;"><%= @request.category %> ( <%= @request.status %> )</h3></div>        
+      <% elsif @request.status == "Reject" %>
+        <div class="panel-heading" style="background:#FF6656;"><h3 style="color:white;"><%= @request.category %> ( <%= @request.status %> )</h3></div>        
+      <% end %>
+
+      <div class="panel-body">
+        <div class="responsive-table">
+          <table id="datatables-example" class="table table-striped table-bordered" width="100%" cellspacing="0">
+            <tr>
+              <td>Image:</td>
+              <% if !@request.image_file_name.nil? %>
+                <td><%= link_to "View Attachment", @request.image.url, target: '_blank' %></td>
+              <% else %>
+                <td>-</td>
+              <% end %>
+            </tr>
+            <tr>
+              <td>Game Name:</td>
+              <% if @request.category == "Transfer" %>
+                <td><strong><%= @request.game_name %></strong> --> <strong><%= @request.game_name_2 %></strong></td>
+              <% else %>
+                <td><%= @request.game_name %></td>
+              <% end %>
+            </tr>
+            <tr>
+              <td>Bank Name:</td>
+              <td><%= @request.bank_name %></td>
+            </tr>
+            <tr>
+              <td>Bank Account:</td>
+              <td><%= @request.bank_acc %></td>
+            </tr>
+            <tr>
+              <td>Amount:</td>
+              <td>RM <%= @request.amount %></td>
+            </tr>
+            <tr>
+              <td>User:</td>
+              <td><%= @request.user.name %></td>
+            </tr>
+            <tr>
+              <td>Description:</td>
+              <td><%= @request.description %></td>
+            </tr>
+            <tr>
+              <td>Remark:</td>
+              <td><%= @request.reason %></td>
+            </tr>     
+            <% if current_user.role.name == "Admin" || current_user.role.name == "Super Admin" %>
+              <tr>
+                <td>Approved by:</td>
+                <td><%= @request.approved_by %></td>
+              </tr>
+            <% end %>    
+          </table>
         </div>
-        <div class="col-md-6 col-sm-6 col-xs-6 text-right">
-           <h4 class="text-right"><%= @request.category %></h4>
-        </div>
-      </div>
-      <div class="col-md-12">
-        <div class="col-md-6">
-          <div class="panel-body text-center">
-            <p style="margin-bottom:0px;">Image</p>
-            <h2 style="margin-top:0px;"><%= link_to image_tag(@request.image.url(:medium), class: 'hidden-xs'), @request.image.url, target: '_blank' %></h2>
-            <h2 style="margin-top:0px;"><%= link_to image_tag(@request.image.url(:thumb), class: 'visible-xs'), @request.image.url, target: '_blank' %></h2>
-            <hr>
+
+      <% if current_user.role.name == "Admin" || current_user.role.name == "Super Admin" %>
+        <div class="col-md-6 text-center">
+          <% if @request.status == "Pending" %>
+            <%= form_for(@request) do |f| %>
+              <div class="form-group">
+                <%= f.label :reason, "Remark for approve:" %>
+                <%= f.text_field :reason, class: "form-control" %>
+              </div>          
+              <div class="form-group">
+                <%= f.hidden_field :status, value: "Approve" %>
+                <%= f.submit "Approve!", class: "btn btn-raise btn-success" %>
+              </div>
+            <% end %>
           </div>
-        </div>
-        <div class="col-md-6">
-          <% if @request.game_name_2.nil? %>
-            <p style="margin-bottom:0px;">Game Name</p>
-            <h2 style="margin-top:0px;"><%= @request.game_name %></h2>
-            <hr>
-          <% else %>
-            <p style="margin-bottom:0px;">Transfer Game</p>
-            <p style="margin-bottom:0px;">From </p><h2 2 style="margin-top:0px; margin-bottom:0px;"><%= @request.game_name %></h2><p style="margin-bottom:0px;">To</p><h2 2 style="margin-top:0px;"><%= @request.game_name_2 %></h2>
-            <hr>
+        
+          <div class="col-md-6 text-center">
+            <%= form_for(@request) do |f| %>
+              <div class="form-group">
+                <%= f.label :reason, "Remark for reject:" %>
+                <%= f.text_field :reason, class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= f.hidden_field :status, value: "Reject" %>
+                <%= f.submit "Reject!", class: "btn btn-raise btn-danger" %>
+              </div>
+            <% end %>
           <% end %>
-
-          <p style="margin-bottom:0px;">Bank Name</p>
-          <h2 style="margin-top:0px;"><%= @request.bank_name %></h2>
-          <hr>
-
-          <p style="margin-bottom:0px;">Bank Acc</p>
-          <h2 style="margin-top:0px;"><%= @request.bank_acc %></h2>
-          <hr>
-
-          <p style="margin-bottom:0px;">Amount</p>
-          <h2 style="margin-top:0px;">RM <%= @request.amount %></h2>
-          <hr>
-
-          <p style="margin-bottom:0px;">User</p>
-          <h2 style="margin-top:0px;"><%= @request.user.name %></h2>
-          <hr>
-
-          <% if !@request.reason.nil?  %>
-            <p style="margin-bottom:0px;">Remark</p>
-            <h2 style="margin-top:0px;"><%= @request.reason %></h2>
-            <hr>
-          <% end %>
-
-        </div>   
-      </div>
-
-    <% if current_user.role.name == "Admin" || current_user.role.name == "Super Admin" %>
-      <%= form_for(@request) do |f| %>
-        <div class="field">
-        <%= f.hidden_field :status, value: "Approve" %><br>
-        <%= f.submit "Approve!" %>
         </div>
-      <% end %>
-    
-      <%= form_for(@request) do |f| %>
-      <div class="field">
-      <%= f.hidden_field :status, value: "Reject" %><br>
-      <%= f.submit "Reject!" %>
-      </div>
+
       <% end %>
 
-      <%= form_for(@request) do |f| %>
-      <div class="field">
-        <%= f.label :reason, "Remark for reject" %>
-        <%= f.text_field :reason %>
-        <%= f.submit "Add Remark" %>
       </div>
-      <% end %>
-    <% end %>
-
-    <%= link_to 'Edit', edit_request_path(@request) %> |
-    <%= link_to 'Back', requests_path %>
     </div>
   </div>
 </div>

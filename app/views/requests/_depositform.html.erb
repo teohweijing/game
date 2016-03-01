@@ -14,6 +14,7 @@
           </div>
         <% end %>
         <div class="field">
+          <%= f.label :image, "Upload attachment" %>
           <%= f.file_field :image %>
         </div> 
         <div class="field">
@@ -22,6 +23,11 @@
         <div class="form-group">
           <%= f.label :game_name %><br>
           <%= collection_select(:request, :game_name, Promotion.order('created_at DESC'), :application_id_with_description, :application_id_with_description, {prompt: true}, {class: "form-control"}) %>
+        </div>          
+        <div class="form-group">
+          <%= f.label :amount, "Amount (RM)" %><br>
+          <%= f.number_field :amount, class: "form-control", placeholder: "Minimum 50" %>
+        </div>        
         <div class="form-group">
           <%= f.label :bank_name %><br>
           <%= f.text_field :bank_name, value: current_user.bank_name, class: "form-control" %>
@@ -31,12 +37,8 @@
           <%= f.text_field :bank_acc, value: current_user.bank_acc , class: "form-control"%>
         </div>
         <div class="form-group">
-          <%= f.label :amount %><br>
-          <%= f.number_field :amount, class: "form-control" %>
-        </div>
-        <div class="form-group">
-          <%= f.label :description %><br>
-          <%= f.text_field :description, class: "form-control" %>
+          <%= f.label :description, "Payment Time (day/month/year hour:minute)" %><br>
+          <%= f.text_field :description, class: "form-control", placeholder: "Example: 20/2/2016 16:56" %>
         </div><br>
         <div class="actions">
           <%= f.submit "Submit", class: "btn ripple-infinite btn-raised btn-success" %>

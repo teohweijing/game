@@ -11,19 +11,24 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :acc %><br>
-    <%= f.text_field :acc %>
-  </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :status %><br>
-    <%= f.select(:status, options_for_select(['Active', 'Inactive'])) %>
+    <%= f.select(:status, options_for_select(['Active', 'Inactive']), {prompt: true}, {class: "form-control"}) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :name %><br>
+    <%= f.text_field :name, class:"form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :acc %><br>
+    <%= f.text_field :acc, class:"form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :holder_name %><br>
+    <%= f.text_field :holder_name, class:"form-control" %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Submit", class: "btn btn-raised btn-success" %>
   </div>
+
 <% end %>

@@ -11,18 +11,19 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, class: "form-control" %>
   </div>
-  <div class="field">
-    <%= f.label :link_one %><br>
-    <%= f.text_field :link_one %><br>
+  <div class="form-group">
+    <%= f.label :link_one, "Download Link" %><br>
+    <%= f.text_field :link_one, placeholder: "http://www.example.com", class: "form-control" %>
   </div>
-  <div class="field">
-    <%= f.file_field :image %>
+  <div class="form-group">
+    <%= f.label :image %><br>
+    <%= f.file_field :image, class: "form-control" %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Submit", class: "btn btn-raise btn-success" %>
   </div>
 <% end %>

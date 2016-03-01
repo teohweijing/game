@@ -2,181 +2,335 @@
 <html>
 <head>
   <title>Myapp</title>
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <% if current_user.nil? %>
+  <style type="text/css">
+	body {
+	font-family: Arial;
+/*	background-image: url('assets/background.jpeg'); */
+	background-color: #3498DB;
+	padding: 50px;
+	}
+	.login {
+	margin: 20px auto;
+	width: 300px;
+	}
+	.login-screen {
+	background-color: #FFF;
+	padding: 20px;
+	border-radius: 5px
+	}
+
+	.app-title {
+	text-align: center;
+	color: #777;
+	}
+
+	.login-form {
+	text-align: center;
+	}
+	.control-group {
+	margin-bottom: 10px;
+	}
+
+	input {
+	text-align: center;
+	background-color: #ECF0F1;
+	border: 2px solid transparent;
+	border-radius: 3px;
+	font-size: 16px;
+	font-weight: 200;
+	padding: 10px 0;
+	width: 250px;
+	transition: border .5s;
+	}
+
+	input:focus {
+	border: 2px solid #3498DB;
+	box-shadow: none;
+	}
+
+	.btn {
+	  border: 2px solid transparent;
+	  background: #3498DB;
+	  color: #ffffff;
+	  font-size: 16px;
+	  line-height: 25px;
+	  padding: 10px 0;
+	  text-decoration: none;
+	  text-shadow: none;
+	  border-radius: 3px;
+	  box-shadow: none;
+	  transition: 0.25s;
+	  display: block;
+	  width: 250px;
+	  margin: 0 auto;
+	}
+
+	.btn:hover {
+	  background-color: #2980B9;
+	}
+
+	.login-link {
+	  font-size: 12px;
+	  color: #444;
+	  display: block;
+	  margin-top: 12px;
+	}
+
+	.login-form .thumbnail {
+	  background: #6BC4FF;
+	  width: 150px;
+	  height: 150px;
+	  margin: 0 auto 30px;
+	  padding: 50px 30px;
+	  border-top-left-radius: 100%;
+	  border-top-right-radius: 100%;
+	  border-bottom-left-radius: 100%;
+	  border-bottom-right-radius: 100%;
+	  box-sizing: border-box;
+	}
+	.login-form .thumbnail img {
+	  display: block;
+	  width: 100%;
+	}
+
+  </style>
+  <% else %>
+  	<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <% end %>
+
   <%= csrf_meta_tags %>
 </head>
+	<% if current_user.nil? %>
+		<!-- start: Guest login page -->
+		<body class="login">
+			<div class="login-screen">
+				<div></div>
+			  	<div class="app-title"><h1>Login</h1></div>
+				<div class="login-form">
+					<% flash.each do |name, msg| %>
+						<div class="alert alert-info fade in" style="margin-bottom:0px;">
+							<%= content_tag :div, msg, id: "flash#{name}" %>
+						</div>
+					<% end %>
+					<%= yield %>
+				</div>
+			</div>
 
-	<body id="mimin" class="dashboard">
-		<!-- start: Header -->
-		<nav class="navbar navbar-default header navbar-fixed-top">
-			<div class="col-md-12 nav-wrapper">
-	            <div class="navbar-header" style="width:100%;">
-	              <div class="opener-left-menu is-open">
-	                <span class="top"></span>
-	                <span class="middle"></span>
-	                <span class="bottom"></span>
-	              </div>
-	                <a href="#" class="navbar-brand"> 
-	                 <b>GAME</b>
-	                </a>
-	              <ul class="nav navbar-nav navbar-right user-nav">
-	              	<% if !current_user.nil? %>
-	                  <li class="user-name"><span>Welcome, <%= current_user.name %></span></li>
-	                <% end %>
-	                <% if !current_user.nil? %>
+			<%= javascript_include_tag 'application', 'data-turbolinks-eval' => false %>
+
+		</body>
+		<!-- end: Guest login page -->
+	<% else %>
+		<body id="mimin" class="dashboard">
+			<!-- start: Header -->
+			<nav class="navbar navbar-default header navbar-fixed-top">
+				<div class="col-md-12 nav-wrapper">
+		            <div class="navbar-header" style="width:100%;">
+		              <div class="opener-left-menu is-open">
+		                <span class="top"></span>
+		                <span class="middle"></span>
+		                <span class="bottom"></span>
+		              </div>
+		                <a href="#" class="navbar-brand"> 
+		                 <b>GAME</b>
+		                </a>
+		              <ul class="nav navbar-nav navbar-right user-nav">
+		                <li class="user-name"><span>Welcome, <%= current_user.name %></span></li>
 						<li><%= link_to '<span class="fa fa-sign-out"></span> Sign out'.html_safe, destroy_user_session_path, method: :delete %></li>
-	                <% else %>
-	                	<li><%= link_to '<span class="fa fa-users"></span> Sign in'.html_safe, new_user_session_path %></li>
-	                <% end %>
-	              </ul>
-	            </div>
-	         </div>
-		</nav>
-		<!-- end: Header -->
+		              </ul>
+		            </div>
+		         </div>
+			</nav>
+			<!-- end: Header -->
 
-		<div class="container-fluid mimin-wrapper">
-			<!-- start: Left Menu -->
-			<div id="left-menu">
-		      <div class="sub-left-menu scroll">
-		        <ul class="nav nav-list">
-		            <li><div class="left-bg"></div></li>
-		            <li class="time">
-		              <h1 class="animated fadeInLeft">21:00</h1>
-		              <p class="animated fadeInRight">Sat,October 1st 2029</p>
-		            </li>
-		            <li class="active ripple">
-		              <%= link_to root_url, class: 'nav-header' do %>
-		              	<span class="fa-home fa"></span> Home 
-		                <span class="fa-angle-right fa right-arrow text-right"></span>
-		              <% end %>
-		            </li>
-		            <li class="ripple">
-		              <% if !current_user.nil? %>
-			              <%= link_to user_accounts_path(current_user), class: 'nav-header' do %>
-			            	<span class="fa-diamond fa"></span> Game Accounts
-			            	<span class="fa-angle-right fa right-arrow text-right"></span>
-			              <% end %>
-		              <% end %>
-		            </li>
-		            <li class="ripple">
-		              <%= link_to requests_path, class: 'nav-header' do %>
-		            	<span class="fa-table fa"></span> All Requests
-		            	<span class="fa-angle-right fa right-arrow text-right"></span>
-		              <% end %>
-		            </li>		            
-		            <li class="ripple">
-		              <%= link_to new_request_path(category: "Deposit"), class: 'nav-header' do %>
-		            	<span class="fa-money fa"></span> Deposit
-		            	<span class="fa-angle-right fa right-arrow text-right"></span>
-		              <% end %>
-		            </li>
-		            <li class="ripple">
-		              <%= link_to new_request_path(category: "Withdrawal"), class: 'nav-header' do %>
-		            	<span class="fa-money fa"></span> Withdrawal
-		            	<span class="fa-angle-right fa right-arrow text-right"></span>
-		              <% end %>
-		            </li>
-		            <li class="ripple">
-		              <%= link_to new_request_path(category: "Transfer"), class: 'nav-header' do %>
-		            	<span class="fa-money fa"></span> Transfer
-		            	<span class="fa-angle-right fa right-arrow text-right"></span>
-		              <% end %>
-		            </li>		            
-		            <li class="ripple">
-		              <%= link_to edit_user_registration_path, class: 'nav-header' do %>
-		            	<span class="fa fa-cogs"></span> Account  
-		            	<span class="fa-angle-right fa right-arrow text-right"></span> 
-		              <% end %>
-		            </li>
-		            <li class="ripple">
-		              <%= link_to destroy_user_session_path, method: :delete, class: 'nav-header' do %>
-		              	<span class="fa fa-sign-out"></span> Sign Out  
-		              	<span class="fa-angle-right fa right-arrow text-right"></span> 
-		              <% end %>
-		            </li>
-		        </ul>
-		      </div>
-			</div>
-			<!-- end: Left Menu -->
-
-			<!-- start: Content -->
-			<div id="content">
-				<% flash.each do |name, msg| %>
-					<div class="alert" style="margin-bottom:0px; background-color:#fff;">
-						<%= content_tag :div, msg, id: "flash#{name}" %>
-					</div>
-				<% end %>
-				<%= yield %>
-			</div>
-			<!-- end: Content -->
-		</div>
-
-		<!-- start: Mobile -->
-		<div id="mimin-mobile" class="reverse">
-	        <div class="mimin-mobile-menu-list">
-	            <div class="col-md-12 sub-mimin-mobile-menu-list animated fadeInLeft">
-	                <ul class="nav nav-list">
-	                    <li class="active ripple">
-			              <%= link_to root_url, class: 'nav-header', 'data-no-turbolink' => true do %>
-	                        <span class="fa-home fa"></span> Home 
-	                        <span class="fa-angle-right fa right-arrow text-right"></span>
-	                      <% end %>
-	                    </li>
-	                    <li class="ripple">
-			              <% if !current_user.nil? %>
-				              <%= link_to user_accounts_path(current_user), class: 'nav-header', 'data-no-turbolink' => true do %>
-				            	<span class="fa-diamond fa"></span> Game Accounts
+			<div class="container-fluid mimin-wrapper">
+				<!-- start: Left Menu -->
+				<div id="left-menu">
+			      <div class="sub-left-menu scroll">
+			        <ul class="nav nav-list">
+			        	<!-- start: Regular User Menu -->
+			        	<% if current_user.role.name == "Regular" %>
+				        	<li><div class="left-bg"></div></li>
+				            <li class="time">
+				              <h1 class="animated fadeInLeft">21:00</h1>
+				              <p class="animated fadeInRight">Sat,October 1st 2029</p>
+				            </li>
+				            <li class="active ripple">
+				              <%= link_to root_url, class: 'nav-header' do %>
+				              	<span class="fa-home fa"></span> Home 
+				                <span class="fa-angle-right fa right-arrow text-right"></span>
+				              <% end %>
+				            </li>
+				            <li class="ripple">
+				              <% if !current_user.nil? %>
+					              <%= link_to user_accounts_path(current_user), class: 'nav-header' do %>
+					            	<span class="fa-diamond fa"></span> Game Accounts
+					            	<span class="fa-angle-right fa right-arrow text-right"></span>
+					              <% end %>
+				              <% end %>
+				            </li>
+				            <li class="ripple">
+				              <%= link_to new_request_path(category: "Deposit"), class: 'nav-header' do %>
+				            	<span class="fa-money fa"></span> Deposit
 				            	<span class="fa-angle-right fa right-arrow text-right"></span>
 				              <% end %>
-			              <% end %>
-	                    </li>
-			            <li class="ripple">
-			              <%= link_to requests_path, class: 'nav-header', 'data-no-turbolink' => true do %>
-			            	<span class="fa-table fa"></span> All Requests
-			            	<span class="fa-angle-right fa right-arrow text-right"></span>
-			              <% end %>
-			            </li>		            	                    
-	                    <li class="ripple">
-			              <%= link_to new_request_path(category: "Deposit"), class: 'nav-header', 'data-no-turbolink' => true do %>
-			            	<span class="fa-money fa"></span> Deposit
-			            	<span class="fa-angle-right fa right-arrow text-right"></span>
-			              <% end %>
-	                    </li>
-	                    <li class="ripple">
-			              <%= link_to new_request_path(category: "Withdrawal"), class: 'nav-header', 'data-no-turbolink' => true do %>
-			            	<span class="fa-money fa"></span> Withdrawal
-			            	<span class="fa-angle-right fa right-arrow text-right"></span>
-			              <% end %>
-	                    </li>
-			            <li class="ripple">
-			              <%= link_to new_request_path(category: "Transfer"), class: 'nav-header', 'data-no-turbolink' => true do %>
-			            	<span class="fa-money fa"></span> Transfer
-			            	<span class="fa-angle-right fa right-arrow text-right"></span>
-			              <% end %>
-			            </li>		            	                    
-	                    <li class="ripple">
-			              <%= link_to edit_user_registration_path, class: 'nav-header', 'data-no-turbolink' => true do %>
-			            	<span class="fa fa-cogs"></span> Account  
-			            	<span class="fa-angle-right fa right-arrow text-right"></span> 
-			              <% end %>
-	                    </li>
-	                    <li class="ripple">
-			              <%= link_to destroy_user_session_path, method: :delete, class: 'nav-header', 'data-no-turbolink' => true do %>
-			              	<span class="fa fa-sign-out"></span> Sign Out  
-			              	<span class="fa-angle-right fa right-arrow text-right"></span> 
-			              <% end %>
-	                    </li>
-	                </ul>
-	            </div>
-	        </div>       
-	      </div>
-	      <button id="mimin-mobile-menu-opener" class="animated rubberBand btn btn-circle btn-primary">
-	        <span class="fa fa-bars"></span>
-	      </button>
-	       <!-- end: Mobile -->
+				            </li>
+				            <li class="ripple">
+				              <%= link_to new_request_path(category: "Withdrawal"), class: 'nav-header' do %>
+				            	<span class="fa-money fa"></span> Withdrawal
+				            	<span class="fa-angle-right fa right-arrow text-right"></span>
+				              <% end %>
+				            </li>
+				            <li class="ripple">
+				              <%= link_to new_request_path(category: "Transfer"), class: 'nav-header' do %>
+				            	<span class="fa-money fa"></span> Transfer
+				            	<span class="fa-angle-right fa right-arrow text-right"></span>
+				              <% end %>
+				            </li>		            
+				            <li class="ripple">
+				              <%= link_to edit_user_registration_path, class: 'nav-header' do %>
+				            	<span class="fa fa-cogs"></span> Account  
+				            	<span class="fa-angle-right fa right-arrow text-right"></span> 
+				              <% end %>
+				            </li>
+			            <!-- end: Regular User Menu -->
 
-		<%= javascript_include_tag 'application', 'data-turbolinks-eval' => false %>
+			            <!-- start: Admin User Menu -->
+			            <% elsif current_user.role.name == "Admin" || current_user.role.name == "Super Admin" %>
+				        	<li><div class="left-bg"></div></li>
+				            <li class="time">
+				              <h1 class="animated fadeInLeft">21:00</h1>
+				              <p class="animated fadeInRight">Sat,October 1st 2029</p>
+				            </li>
+				            <li class="active ripple">
+				              <%= link_to root_url, class: 'nav-header' do %>
+				              	<span class="fa-home fa"></span> Home 
+				                <span class="fa-angle-right fa right-arrow text-right"></span>
+				              <% end %>
+				            </li>
+				            <li class="ripple">
+				              <%= link_to users_path, class: 'nav-header' do %>
+				            	<span class="fa-diamond fa"></span> Users
+				            	<span class="fa-angle-right fa right-arrow text-right"></span>
+				              <% end %>
+				            </li>
+				            <li class="ripple">
+				              <%= link_to requests_path, class: 'nav-header' do %>
+				            	<span class="fa-table fa"></span> Requests
+				            	<span class="fa-angle-right fa right-arrow text-right"></span>
+				              <% end %>
+				            </li>		            
+				            <li class="ripple">
+				              <%= link_to banks_path, class: 'nav-header' do %>
+				            	<span class="fa-money fa"></span> Banks
+				            	<span class="fa-angle-right fa right-arrow text-right"></span>
+				              <% end %>
+				            </li>
+				            <li class="ripple">
+				              <%= link_to promotions_path, class: 'nav-header' do %>
+				            	<span class="fa-money fa"></span> Promotions
+				            	<span class="fa-angle-right fa right-arrow text-right"></span>
+				              <% end %>
+				            </li>
+				            <li class="ripple">
+				              <%= link_to applications_path, class: 'nav-header' do %>
+				            	<span class="fa-money fa"></span> Games
+				            	<span class="fa-angle-right fa right-arrow text-right"></span>
+				              <% end %>
+				            </li>		            
+				            <li class="ripple">
+				              <%= link_to edit_user_registration_path, class: 'nav-header' do %>
+				            	<span class="fa fa-cogs"></span> Account  
+				            	<span class="fa-angle-right fa right-arrow text-right"></span> 
+				              <% end %>
+				            </li>
+			            <!-- end: Admin User Menu -->
+			            <% end %>
+			        </ul>
+			      </div>
+				</div>
+				<!-- end: Left Menu -->
 
-	</body>
+				<!-- start: Content -->
+				<div id="content">
+					<% flash.each do |name, msg| %>
+						<div class="alert alert-info fade in" style="margin-bottom:0px;">
+							<%= content_tag :div, msg, id: "flash#{name}" %>
+						</div>
+					<% end %>
+					<%= yield %>
+				</div>
+				<!-- end: Content -->
+			</div>
+
+			<!-- start: Mobile -->
+			<div id="mimin-mobile" class="reverse">
+		        <div class="mimin-mobile-menu-list">
+		            <div class="col-md-12 sub-mimin-mobile-menu-list animated fadeInLeft">
+		                <ul class="nav nav-list">
+		                    <li class="active ripple">
+				              <%= link_to root_url, class: 'nav-header', 'data-no-turbolink' => true do %>
+		                        <span class="fa-home fa"></span> Home 
+		                        <span class="fa-angle-right fa right-arrow text-right"></span>
+		                      <% end %>
+		                    </li>
+		                    <li class="ripple">
+				              <% if !current_user.nil? %>
+					              <%= link_to user_accounts_path(current_user), class: 'nav-header', 'data-no-turbolink' => true do %>
+					            	<span class="fa-diamond fa"></span> Game Accounts
+					            	<span class="fa-angle-right fa right-arrow text-right"></span>
+					              <% end %>
+				              <% end %>
+		                    </li>
+				            <li class="ripple">
+				              <%= link_to requests_path, class: 'nav-header', 'data-no-turbolink' => true do %>
+				            	<span class="fa-table fa"></span> All Requests
+				            	<span class="fa-angle-right fa right-arrow text-right"></span>
+				              <% end %>
+				            </li>		            	                    
+		                    <li class="ripple">
+				              <%= link_to new_request_path(category: "Deposit"), class: 'nav-header', 'data-no-turbolink' => true do %>
+				            	<span class="fa-money fa"></span> Deposit
+				            	<span class="fa-angle-right fa right-arrow text-right"></span>
+				              <% end %>
+		                    </li>
+		                    <li class="ripple">
+				              <%= link_to new_request_path(category: "Withdrawal"), class: 'nav-header', 'data-no-turbolink' => true do %>
+				            	<span class="fa-money fa"></span> Withdrawal
+				            	<span class="fa-angle-right fa right-arrow text-right"></span>
+				              <% end %>
+		                    </li>
+				            <li class="ripple">
+				              <%= link_to new_request_path(category: "Transfer"), class: 'nav-header', 'data-no-turbolink' => true do %>
+				            	<span class="fa-money fa"></span> Transfer
+				            	<span class="fa-angle-right fa right-arrow text-right"></span>
+				              <% end %>
+				            </li>		            	                    
+		                    <li class="ripple">
+				              <%= link_to edit_user_registration_path, class: 'nav-header', 'data-no-turbolink' => true do %>
+				            	<span class="fa fa-cogs"></span> Account  
+				            	<span class="fa-angle-right fa right-arrow text-right"></span> 
+				              <% end %>
+		                    </li>
+		                    <li class="ripple">
+				              <%= link_to destroy_user_session_path, method: :delete, class: 'nav-header', 'data-no-turbolink' => true do %>
+				              	<span class="fa fa-sign-out"></span> Sign Out  
+				              	<span class="fa-angle-right fa right-arrow text-right"></span> 
+				              <% end %>
+		                    </li>
+		                </ul>
+		            </div>
+		        </div>       
+		      </div>
+		      <button id="mimin-mobile-menu-opener" class="animated rubberBand btn btn-circle btn-primary">
+		        <span class="fa fa-bars"></span>
+		      </button>
+		       <!-- end: Mobile -->
+
+			<%= javascript_include_tag 'application', 'data-turbolinks-eval' => false %>
+
+		</body>
+	<% end %>
 </html>
 

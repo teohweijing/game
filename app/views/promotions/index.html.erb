@@ -1,27 +1,45 @@
-<h1>Listing Promotions</h1>
+<div class="panel box-shadow-none content-header">
+  <div class="panel-body">
+    <div class="col-md-12">
+        <h3 class="animated fadeInLeft">All Promotions</h3>
+        <p class="animated fadeInDown">
+          Promotion <span class="fa-angle-right fa"></span> All Promotions
+        </p>
+    </div>
+  </div>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Application</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="col-md-12 top-20 padding-0">
+  <div class="col-md-12">
+    <div class="panel">
+      <div class="panel-heading"><h3>Promotions Table</h3></div>
+      <div class="panel-body">
+        <div class="responsive-table">
+          <table id="datatables-example" class="table table-striped table-bordered" width="100%" cellspacing="0">
 
-  <tbody>
-    <% @promotions.each do |promotion| %>
-      <tr>
-        <td><%= promotion.application.name %></td>
-        <td><%= promotion.description %></td>
-        <td><%= link_to 'Show', promotion %></td>
-        <td><%= link_to 'Edit', edit_promotion_path(promotion) %></td>
-        <td><%= link_to 'Destroy', promotion, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+            <thead>
+              <tr>
+                <th>Game Platform</th>
+                <th>Description</th>
+                <th colspan="3"></th>
+              </tr>
+            </thead>
 
-<br>
-
-<%= link_to 'New Promotion', new_promotion_path %>
+            <tbody>
+              <% @promotions.each do |promotion| %>
+                <tr>
+                  <td><%= promotion.application.name %></td>
+                  <td><%= promotion.description %></td>
+                  <td><%= link_to 'Show', promotion %></td>
+                  <td><%= link_to 'Edit', edit_promotion_path(promotion) %></td>
+                  <td><%= link_to 'Destroy', promotion, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        <%= link_to 'New Promotion', new_promotion_path, class: "btn btn-round btn-primary" %>
+      </div>
+    </div>
+  </div>
+</div>
