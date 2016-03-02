@@ -1,0 +1,24 @@
+/* line 1, /Users/mohdfalmiosman/.rbenv/versions/2.1.7/lib/ruby/gems/2.1.0/gems/rails_db-1.1.1/app/assets/stylesheets/rails_db/sidebar.css.scss */
+.side-nav.tables {
+  padding-top: 6px;
+}
+/* line 3, /Users/mohdfalmiosman/.rbenv/versions/2.1.7/lib/ruby/gems/2.1.0/gems/rails_db-1.1.1/app/assets/stylesheets/rails_db/sidebar.css.scss */
+.side-nav.tables li {
+  margin: 0;
+  margin-left: 3px;
+}
+/* line 6, /Users/mohdfalmiosman/.rbenv/versions/2.1.7/lib/ruby/gems/2.1.0/gems/rails_db-1.1.1/app/assets/stylesheets/rails_db/sidebar.css.scss */
+.side-nav.tables li a {
+  padding: 2px 4px;
+}
+/* line 8, /Users/mohdfalmiosman/.rbenv/versions/2.1.7/lib/ruby/gems/2.1.0/gems/rails_db-1.1.1/app/assets/stylesheets/rails_db/sidebar.css.scss */
+.side-nav.tables li a.selected {
+  font-weight: bold;
+}
+
+/* line 16, /Users/mohdfalmiosman/.rbenv/versions/2.1.7/lib/ruby/gems/2.1.0/gems/rails_db-1.1.1/app/assets/stylesheets/rails_db/sidebar.css.scss */
+#sidebar h3 {
+  font-size: 18px;
+  margin: 0;
+  padding: 0;
+}

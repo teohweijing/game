@@ -1,0 +1,15 @@
+/* line 1, /Users/mohdfalmiosman/.rbenv/versions/2.1.7/lib/ruby/gems/2.1.0/gems/rails_db-1.1.1/app/assets/stylesheets/rails_db/table.css.scss */
+span.pk {
+  color: brown;
+}
+
+/* line 5, /Users/mohdfalmiosman/.rbenv/versions/2.1.7/lib/ruby/gems/2.1.0/gems/rails_db-1.1.1/app/assets/stylesheets/rails_db/table.css.scss */
+.delete_td, .edit_td {
+  width: 24px;
+}
+
+/* line 9, /Users/mohdfalmiosman/.rbenv/versions/2.1.7/lib/ruby/gems/2.1.0/gems/rails_db-1.1.1/app/assets/stylesheets/rails_db/table.css.scss */
+.column-name {
+  float: left;
+  width: 20%;
+}

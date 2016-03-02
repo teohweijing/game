@@ -1,0 +1,10 @@
+/* line 1, /Users/mohdfalmiosman/.rbenv/versions/2.1.7/lib/ruby/gems/2.1.0/gems/rails_db-1.1.1/app/assets/stylesheets/rails_db/foundation_and_overrides.css.scss */
+.row {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* line 6, /Users/mohdfalmiosman/.rbenv/versions/2.1.7/lib/ruby/gems/2.1.0/gems/rails_db-1.1.1/app/assets/stylesheets/rails_db/foundation_and_overrides.css.scss */
+body {
+  font-family: 'Open Sans', "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+}

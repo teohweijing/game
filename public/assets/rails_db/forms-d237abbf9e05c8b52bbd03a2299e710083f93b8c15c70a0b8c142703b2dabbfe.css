@@ -1,0 +1,11 @@
+/* line 1, /Users/mohdfalmiosman/.rbenv/versions/2.1.7/lib/ruby/gems/2.1.0/gems/rails_db-1.1.1/app/assets/stylesheets/rails_db/forms.css.scss */
+select.datetime, select.date, select.time {
+  padding-right: 25px;
+  width: auto;
+}
+
+/* line 6, /Users/mohdfalmiosman/.rbenv/versions/2.1.7/lib/ruby/gems/2.1.0/gems/rails_db-1.1.1/app/assets/stylesheets/rails_db/forms.css.scss */
+.scrollable_form {
+  max-height: 600px;
+  overflow: scroll;
+}

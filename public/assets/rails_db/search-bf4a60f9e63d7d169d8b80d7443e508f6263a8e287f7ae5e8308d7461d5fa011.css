@@ -1,0 +1,9 @@
+/* line 2, /Users/mohdfalmiosman/.rbenv/versions/2.1.7/lib/ruby/gems/2.1.0/gems/rails_db-1.1.1/app/assets/stylesheets/rails_db/search.css.scss */
+#search_form select, #search_form input, #search_form button {
+  width: auto;
+  display: inline-block;
+}
+/* line 7, /Users/mohdfalmiosman/.rbenv/versions/2.1.7/lib/ruby/gems/2.1.0/gems/rails_db-1.1.1/app/assets/stylesheets/rails_db/search.css.scss */
+#search_form .sorting_options select {
+  margin-right: 5px;
+}
