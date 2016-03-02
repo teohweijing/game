@@ -18,7 +18,7 @@ gem 'will_paginate', '~> 3.1'
 gem 'will_paginate-bootstrap', '~> 1.0', '>= 1.0.1'
 gem 'tilt', '~> 2.0', '>= 2.0.2'
 gem 'taps', '~> 0.3.24'
-gem 'rails_12factor'
+gem 'rails_12factor', group: :production
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
