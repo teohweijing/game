@@ -3060,7 +3060,7 @@ ul li a:focus {
   .responsive-table td:before { content: attr(data-title); }
 
   .search-nav{
-    display: none !Im;
+    display: none !Important;
   }
 
   #quote-carousel .carousel-indicators {
