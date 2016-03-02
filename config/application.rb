@@ -6,11 +6,6 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-# config/application.rb
-config.assets.precompile += [
-'style.css'
-]
-
 module Game
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -30,5 +25,11 @@ module Game
 
     # Needed for Devise gem
     config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+    # config/application.rb
+    config.assets.precompile += [
+    'style.css'
+    ]
+    
   end
 end
