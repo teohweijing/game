@@ -5,6 +5,9 @@ class CreateAccounts < ActiveRecord::Migration
       t.string :password
       t.belongs_to :user, index: true, foreign_key: true
 
+      #just added in PG
+      t.belongs_to :application, index: true, foreign_key: true
+
       t.timestamps null: false
     end
   end

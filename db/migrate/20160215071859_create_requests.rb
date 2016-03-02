@@ -6,6 +6,9 @@ class CreateRequests < ActiveRecord::Migration
       t.string :bank_name
       t.string :bank_acc
       t.integer :amount
+      #just added to PG
+      t.string :status
+
       t.belongs_to :user, index: true, foreign_key: true
 
       t.timestamps null: false
