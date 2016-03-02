@@ -25,11 +25,5 @@ module Game
 
     # Needed for Devise gem
     config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-
-    # config/application.rb
-    config.assets.precompile += [
-    'style.css'
-    ]
-    
   end
 end
