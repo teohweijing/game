@@ -3000,36 +3000,11 @@ ul li a:focus {
 }
 
 .rainy .shadow {
-  height: 10px;
-  width: 60px;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  -ms-border-radius: 50%;
-  -o-border-radius: 50%;
-  border-radius: 50%;
-  background-color: #C4EDFF;
-  -webkit-transition: height .25s ease, width .25s ease;
-  -moz-transition: height .25s ease, width .25s ease;
-  -ms-transition: height .25s ease, width .25s ease;
-  -o-transition: height .25s ease, width .25s ease;
-  transition: height .25s ease, width .25s ease;
-  -webkit-transition: height .25s ease, width .25s ease;
-  -moz-transition: height .25s ease, width .25s ease;
-  -ms-transition: height .25s ease, width .25s ease;
-  -o-transition: height .25s ease, width .25s ease;
-  transition: height .25s ease, width .25s ease;
-  -webkit-transform: transform: translate(-50%, -50%);
-  -moz-transform: transform: translate(-50%, -50%);
-  -ms-transform: transform: translate(-50%, -50%);
-  -o-transform: transform: translate(-50%, -50%);
-  transform: transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  margin-top: 90px;
-  margin-left: 50px;
+height : 10px;
+width : 60px;
+background-color : #c4edff;
+margin-top : 90px;
+margin-left : 50px;
 }
 
 .rainy .shadow:before,
